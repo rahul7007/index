@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.Cono{
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.Rowo{
+    background: white;
+    width: 60%;
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 2rem;
+    z-index: 2;
+    backdrop-filter: blur(2rem);
+    display: flex;
+}
+
+.Colo{
+    width: 60%;
+    border: 2px solid red;
+}
+
+.profile_icon{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+h3 {
+    color: #426696;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: center;
+}
+
+h2,
+p {
+    color: #658ec6;
+    font-weight: 500;
+    opacity: 0.8;
+    text-align: center;
+  }
+
+  .links{
+      background-color: none;
+      text-align: center;
+  }
+
+    .list-group-item.active {
+        z-index: 2;
+        color: black;
+        background: linear-gradient(
+            to right bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0)
+          );
+        border: none
+        
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: .75rem 1.25rem;
+        background: linear-gradient(
+            to right bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0)
+          );
+        border: none;
+    }
+
+    .list-group-item:hover {
+        background: linear-gradient(
+            to right bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0)
+          );
+    }
