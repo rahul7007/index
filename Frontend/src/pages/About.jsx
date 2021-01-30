@@ -4,13 +4,13 @@ import './style.css'
 
 import dp from './img/myavatar.png';
 import aboutImg from './img/about.png';
-import projectImg from './img/projectmind.png';
+// import projectImg from './img/projectmind.png';
 import work1Img from './img/work1.jpg';
 import work2Img from './img/work21.jpg';
 import work3Img from './img/work3.jpg';
 import work4Img from './img/work-4.gif';
-import work5Img from './img/work5.jpg';
-import work6Img from './img/work6.jpg';
+import work5Img from './img/no-information.jpg';
+// import work6Img from './img/work6.jpg';
 
 
 class About extends Component {
@@ -56,6 +56,10 @@ class About extends Component {
         const navMenu = document.getElementById('nav-menu')
         navMenu.classList.remove('show')
     }
+
+    message = (props) =>{
+        alert("Site Under Construction")
+    }
     render() { 
         return ( 
             <React.Fragment>
@@ -78,8 +82,8 @@ class About extends Component {
                                 <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
                                 <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                                 <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                                <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
-                                <li class="nav__item"><a href="#works" class="nav__link">Works</a></li>
+                                {/* <li class="nav__item"><a href="#services" class="nav__link">Services</a></li> */}
+                                <li class="nav__item"><a href="#works" class="nav__link">Projects</a></li>
                                 <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                             </ul>
                         </div>
@@ -105,18 +109,18 @@ class About extends Component {
                                     <a href="http://localhost:3000/" class="home__social-link"><i class="bx bxl-behance"></i></a>
                                 </div>
 
-                                <a download="" href="#" class="button home__button">Download Resume</a>
+                                <a download="no-information.jpg" href={work5Img} class="button home__button">Download Resume</a>
                             </div>
                         </div>
                     </section>
                     {/* About */}
                     <section class="about section" id="about">
-                        <span class="section-subtitle">My Intro</span>
-                        <h2 class="section-title">About me</h2>
+                        {/* <span class="section-subtitle">My Intro</span> */}
+                        <h2 class="section-title"><b>About me</b></h2>
 
                         <div class="about__container bd-grid">
                             <div class="about__data">
-                                <p class="about__description">Experienced Software Engineer with a demonstrated history of working in the computer software industry. Skilled in PHP, Java, HTML, Bootstrap, and Cascading Style Sheets (CSS). Strong engineering professional with a Master of Computer Applications - MCA focused in Computer Programming, Specific Applications from Jorhat Engineering College P.O. Jorhat-785007. </p>
+                                <p class="about__description">&emsp;Experienced Software Developer with a demonstrated history of working in the computer software industry. Skilled in PHP, Java, HTML, Bootstrap, and Cascading Style Sheets (CSS). Strong engineering professional with a Master of Computer Applications - MCA focused in Computer Programming, Specific Applications from Jorhat Engineering College P.O. Jorhat-785007. </p>
                                 <img src={aboutImg} alt="" class="about__img" />
                             </div>
 
@@ -172,8 +176,8 @@ class About extends Component {
                     </section>
                     {/* Skills */}
                     <section class="skills section" id="skills">
-                        <span class="section-subtitle">Why Choose Me</span>
-                        <h2 class="section-title">My expertise area</h2>
+                        {/* <span class="section-subtitle">Why Choose Me</span> */}
+                        <h2 class="section-title"><b>My expertise area</b></h2>
 
                         <div class="skills__container bd-grid">
                             <div class="skills__content">
@@ -235,14 +239,14 @@ class About extends Component {
                     </section>
                     {/* Education */}
                     <section class="education section">
-                        <span class="section-subtitle">Qualification</span>
-                        <h2 class="section-title">My Education</h2>
+                        {/* <span class="section-subtitle">Qualification</span> */}
+                        <h2 class="section-title"><b>My Education</b></h2>
 
                         <div class="education__container bd-grid">
                             <div class="education__content">
                                 <div>
-                                    <h3 class="education__year">2012 - 2015</h3>
-                                    <span class="education__university">Gauhati University</span>
+                                    <h3 class="education__year">2012 - 2015&emsp;</h3>
+                                    <span class="education__university">Gauhati University&emsp;</span>
                                 </div>
 
                                 <div class="education__time">
@@ -251,15 +255,15 @@ class About extends Component {
                                 </div>
 
                                 <div>
-                                    <h3 class="education__race">Bachelor of Computer Application</h3>
-                                    {/* <span class="education__speciality">Frontend</span> */}
+                                    <h3 class="education__race">Bachelor Degree</h3>
+                                    <span class="education__speciality">Bachelor of Computer Application</span>
                                 </div>
                             </div>
 
                             <div class="education__content">
                                 <div>
-                                    <h3 class="education__year">2016- 2019</h3>
-                                    <span class="education__university">Dibrugarh University</span>
+                                    <h3 class="education__year">2016- 2019&emsp;</h3>
+                                    <span class="education__university">Dibrugarh University&emsp;</span>
                                 </div>
 
                                 <div class="education__time">
@@ -268,8 +272,8 @@ class About extends Component {
                                 </div>
 
                                 <div>
-                                    <h3 class="education__race">Master of Computer Application</h3>
-                                    {/* <span class="education__speciality">Backend</span> */}
+                                    <h3 class="education__race">Master Degree</h3>
+                                    <span class="education__speciality">Master of Computer Application</span>
                                 </div>
                             </div>
 
@@ -348,7 +352,7 @@ class About extends Component {
                     </div>
                 </section> */}
                     {/* Projects */}
-                    <section class="project section">
+                    {/* <section class="project section">
                         <div class="project__container bd-grid">
                             <div class="project__data">
                                 <h2 class="section-title project__title">
@@ -361,11 +365,11 @@ class About extends Component {
                             </div>
                             <img src={projectImg} alt="" class="project__img" />
                         </div>
-                    </section>
+                    </section> */}
                     {/* Works */}
                     <section class="works section" id="works">
-                        <span class="section-subtitle">My portfolio</span>
-                        <h2 class="section-title">Recent projects</h2>
+                        {/* <span class="section-subtitle">My portfolio</span> */}
+                        <h2 class="section-title"><b>Recent projects</b></h2>
 
                         <div class="works__container bd-grid">
                 <div class="works__img">
@@ -390,7 +394,6 @@ class About extends Component {
                     <img src={work3Img} alt="" />
 
                     <div class="works__data">
-                        <a href="https://github.com/rahul7007/Chat-App" class="works__link"><i class="bx bx-link-alt"></i></a>
                         <a href="https://github.com/rahul7007/Chat-App" class="works__link"><i class="bx bx-link-alt"></i></a>
                         <span class="works__title">Chat App</span>
                     </div>
@@ -426,21 +429,21 @@ class About extends Component {
                     </section>
                     {/* Contact */}
                     <section class="contact section" id="contact">
-                        <span class="section-subtitle">Contact Me</span>
-                        <h2 class="section-title">Get in touch</h2>
+                        {/* <span class="section-subtitle">Contact Me</span> */}
+                        <h2 class="section-title"><b>Get in touch</b></h2>
 
                         <div class="contact__container bd-grid">
                             <form action="" class="contact__form">
                                 <div class="contact__inputs">
-                                    <input type="text" placeholder="Name" class="contact__input" />
-                                    <input type="mail" placeholder="Email" class="contact__input" />
+                                    <input type="text" placeholder="Name" class="contact__input" onKeyUp={this.message} />
+                                    <input type="mail" placeholder="Email" class="contact__input" onKeyUp={this.message}/>
                                 </div>
 
-                                <input type="text" placeholder="Project" class="contact__input" />
+                                <input type="text" placeholder="Project" class="contact__input" onKeyUp={this.message}/>
 
-                                <textarea name="" id="" cols="0" rows="10" placeholder="Message" class="contact__input"></textarea>
+                                <textarea name="" id="" cols="0" rows="10" placeholder="Message" class="contact__input" onKeyUp={this.message}></textarea>
 
-                                <input type="submit" value="Send Message" class="button contact__button" />
+                                <input type="submit" value="Send Message" class="button contact__button" onClick={this.message} />
                             </form>
 
                             <div>
@@ -458,8 +461,8 @@ class About extends Component {
 
                                 <div class="contact__info">
                                     <h3 class="contact__subtitle">Location</h3>
-                                    <span class="contact__text">India, Assam</span>
-                                    <span class="contact__text">Guwahati 781016</span>
+                                    <span class="contact__text">Assam, Guwahati-781016</span>
+                                    <span class="contact__text">India</span>
                                 </div>
                             </div>
                         </div>

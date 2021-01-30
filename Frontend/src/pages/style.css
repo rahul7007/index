@@ -69,6 +69,22 @@ body{
     line-height: 1.6;
 }
 
+a:link {
+    text-decoration: none;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  a:active {
+    text-decoration: none;
+  }
+
 h1,h2,h3,p{
     margin: 0;
 }
@@ -155,6 +171,7 @@ img{
     align-items: center;
     background-color: var(--first-color);
     transition: .5s;
+    opacity: .9;
 }
 
 .nav__close{
@@ -171,7 +188,8 @@ img{
 }
 
 .nav__link{
-    font-size: 1rem;
+    font-size: 2rem;
+    font-family: "Joti One";
     text-transform: uppercase;
     color: var(--first-color-lighten);
     font-weight: var(--font-bold);
@@ -297,6 +315,7 @@ img{
 
 .about__description{
     margin-bottom: var(--mb-4);
+    text-align: justify;
 }
 
 .about__img{
@@ -668,7 +687,8 @@ img{
     }
 
     .nav__menu{
-        width: var(--nav-width)
+        width: var(--nav-width);
+        opacity: 1;
     }
 
     .about__container, 
