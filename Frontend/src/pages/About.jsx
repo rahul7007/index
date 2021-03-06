@@ -1,4 +1,12 @@
 import React, { Component } from "react";
+import { FaHackerrank } from 'react-icons/fa';
+
+
+import ReactDOM from 'react-dom'
+import App from '../app'
+import ParticlesBg from "particles-bg";
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
 
@@ -15,7 +23,24 @@ import work5Img from './img/no-information.jpg';
 
 class About extends Component {
 
-    componentDidMount(){
+    constructor(props) {
+        super(props)
+        this.state = {
+          darkMode: 'false',
+          weather:'',
+          status:'',
+          country:'',
+          city:'',
+          icon:'',
+          time: new Date(),
+          alias: '',
+          email: '',
+          phone:'',
+          message: ''
+        };
+      }
+
+    async componentDidMount(){
         const navMenu = document.getElementById('nav-menu')
         // remove menu
         const navLink = document.querySelectorAll('.nav__link')
@@ -45,6 +70,37 @@ class About extends Component {
                 }
             })
         }
+
+        const result = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Guwahati&units=metric&APPID=f196e1c1651f97563f531c7f465d8252')
+        const data = await result.json()
+        const weather_icon = await fetch('https://openweathermap.org/img/w/50d.png')
+        console.log(data.weather[0].icon);
+        // console.log(data);
+        this.setState({
+            city: data.name,
+            weather: data.main.temp,
+            country: data.sys.country,
+            status: data.weather[0].main,
+            icon: data.weather[0].icon
+        })
+    }
+
+    onChange = (event) =>{
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+    }
+
+    componentWillMount(){
+        setInterval(()=>
+            this.currentTime(), 1000        
+        )
+    }
+
+    currentTime(){
+        this.setState({
+            time: new Date()
+        })
     }
 
     openMenu = () =>{
@@ -57,35 +113,81 @@ class About extends Component {
         navMenu.classList.remove('show')
     }
 
-    message = (props) =>{
-        alert("Site Under Construction")
+    SendMessage = (e) =>{
+        e.preventDefault()
+        var From = this.state.alias
+        var Email = this.state.email
+        var Phone = this.state.phone
+        var Message = this.state.message
+        const payload = {From, Email, Phone, Message};
+        console.log("payload", payload);
+        // api.sendTextMessage(payload).then((res =>{
+        //     //alert(res.data)
+        //     alert(From)
+        //     alert(Organization)
+        //     alert(Email)
+        //     alert(Phone)
+        //     alert(Message)
+        // }))
+    }
+
+    changeTheme = () =>{
+        if(this.state.darkMode == 'false'){
+            this.setState({
+                darkMode: 'true'
+            })
+        }
+        if(this.state.darkMode == 'true'){
+            this.setState({
+                darkMode: 'false'
+            })
+        }
+        // alert(this.state.darkMode)
     }
     render() { 
         return ( 
             <React.Fragment>
+                <div className= {this.state.darkMode ==='true' ? "dark-mode" : "light-mode"}>
                 {/* header */}
                 <header class="l-header">
                     <nav class="nav bd-grid">
                         <div class="nav__toggle" id="nav-toggle">
                             <i onClick={this.openMenu} class='bx bx-menu'></i>
                         </div>
+                        {/* <div>
+                            <img class="weater__icon" src={`https://openweathermap.org/img/w/${this.state.icon}.png`} />
+                            {this.state.weather}°C
+                        </div> */}
+                        {/* <div style={{float:'right', textAlign:'right'}}>
+                        {this.state.city}, {this.state.country}
+                        <br />
+                        Haze
+                        </div> */}
+                        {/* <div class="neon font-effect-outline" >
+                            {this.state.time.toLocaleTimeString('it-IT')}
+                        </div> */}
 
                         <div>
-                            <a href="#" class="nav__logo">Spark</a>
+                            {/* <a href="#" class="nav__logo">Spark</a> */}
+                            {this.state.darkMode === 'true' ? <i onClick={this.changeTheme} class='bx bx-sun' style={{fontSize:'2rem', color:'#2AA198'}}></i> : 
+                            <i onClick={this.changeTheme} class='bx bxs-moon' style={{fontSize:'2rem', color:'#002b36'}} ></i> } 
                         </div>
 
-                        <div class="nav__menu" id="nav-menu">
+                        <div class="dark-mode nav__menu" id="nav-menu">
                             <div class="nav__close" id="nav-close">
                                 <i onClick={this.closeMenu} class='bx bx-x'></i>
                             </div>
                             <ul class="nav__list">
-                                <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-                                <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                                <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                                <li class="nav__item"><a href="#home" class="nav__link active">Home.html</a></li>
+                                <li class="nav__item"><a href="#about" class="nav__link">About.js</a></li>
+                                <li class="nav__item"><a href="#skills" class="nav__link">Skills.json</a></li>
                                 {/* <li class="nav__item"><a href="#services" class="nav__link">Services</a></li> */}
-                                <li class="nav__item"><a href="#works" class="nav__link">Projects</a></li>
-                                <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                                <li class="nav__item"><a href="#works" class="nav__link">Projects.py</a></li>
+                                <li class="nav__item"><a href="#contact" class="nav__link">Contact.css</a></li>
                             </ul>
+                            <div class="git__branch">
+                                <i class="bx bx-git-branch" style={{fontSize: '2rem'}}></i>master*
+                            </div>
                         </div>
                     </nav>
                 </header>
@@ -105,7 +207,9 @@ class About extends Component {
                                 <div class="home__social">
                                     <a href="https://www.linkedin.com/in/rahul-sarma-9348a0187/" class="home__social-link"><i class="bx bxl-linkedin"></i></a>
                                     <a href="https://github.com/rahul7007" class="home__social-link"><i class="bx bxl-github"></i></a>
-                                    <a href="https://www.hackerrank.com/Rahul_Sarma" class="home__social-link"><i class="fab fa-hackerrank"></i></a>
+                                    <a href="https://www.hackerrank.com/Rahul_Sarma" class="home__social-link">
+                                        <FaHackerrank />
+                                    </a>
                                     <a href="http://localhost:3000/" class="home__social-link"><i class="bx bxl-behance"></i></a>
                                 </div>
 
@@ -120,7 +224,12 @@ class About extends Component {
 
                         <div class="about__container bd-grid">
                             <div class="about__data">
-                                <p class="about__description">&emsp;Experienced Software Developer with a demonstrated history of working in the computer software industry. Skilled in PHP, Java, HTML, Bootstrap, and Cascading Style Sheets (CSS). Strong engineering professional with a Master of Computer Applications - MCA focused in Computer Programming, Specific Applications from Jorhat Engineering College P.O. Jorhat-785007. </p>
+                                <p class="about__description">&emsp;
+                                I'm Rahul. A passionate coder. Currently working as a software developer at BoldTek India Pvt. Ltd., Assam. I also served as an intern at Robotech India Pvt. Ltd.
+                                </p>
+                                <p class="about__description">&emsp;
+                                Apart from coding, I like to playing video games, listening music, photo editing, travelling.
+                                </p>
                                 <img src={aboutImg} alt="" class="about__img" />
                             </div>
 
@@ -145,7 +254,7 @@ class About extends Component {
                                 </div>
                 
                                 <div class="about__information">
-                                    <h3 class="about__information-title">Experience and support</h3>
+                                    <h3 class="about__information-title">Experience</h3>
                 
                                     <div class="about__information-data">
                                         <i class="bx bx-medal about__information-icon"></i>
@@ -163,13 +272,6 @@ class About extends Component {
                                         </div>
                                     </div>
                 
-                                    <div class="about__information-data">
-                                        <i class="bx bx-support about__information-icon"></i>
-                                        <div>
-                                            <span class="about__information-subtitle">Support</span>
-                                            <span class="about__information-subtitle-small">Online 24/7</span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -177,28 +279,40 @@ class About extends Component {
                     {/* Skills */}
                     <section class="skills section" id="skills">
                         {/* <span class="section-subtitle">Why Choose Me</span> */}
-                        <h2 class="section-title"><b>My expertise area</b></h2>
+                        <h2 class="section-title"><b>Technology I worked</b></h2>
 
                         <div class="skills__container bd-grid">
                             <div class="skills__content">
-                                <h3 class="skills__subtitle">Frontend</h3>
+                                <h3 class="skills__subtitle">Programming Language</h3>
 
                                 <div class="skills__data">
-                                    <span class="skills__name">HTML/CSS</span>
-                                    <span class="skills__number">80%</span>
-                                    <span class="skills__bar skills__html"></span>
-                                </div>
-
-                                <div class="skills__data">
-                                    <span class="skills__name">JavaScript</span>
-                                    <span class="skills__number">90%</span>
-                                    <span class="skills__bar skills__js"></span>
-                                </div>
-
-                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
                                     <span class="skills__name">React</span>
-                                    <span class="skills__number">70%</span>
-                                    <span class="skills__bar skills__react"></span>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">Node</span>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">Express</span>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">Python</span>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">Socket.io</span>
                                 </div>
 
                                 {/* <div class="skills__data">
@@ -209,30 +323,50 @@ class About extends Component {
                             </div>
 
                             <div class="skills__content">
-                                <h3 class="skills__subtitle">Backend</h3>
+                                <h3 class="skills__subtitle">Databases</h3>
 
                                 <div class="skills__data">
-                                    <span class="skills__name">Php</span>
-                                    <span class="skills__number">80%</span>
-                                    <span class="skills__bar skills__php"></span>
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">MySql</span>
                                 </div>
 
                                 <div class="skills__data">
-                                    <span class="skills__name">Node js</span>
-                                    <span class="skills__number">70%</span>
-                                    <span class="skills__bar skills__node"></span>
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">MongoDb</span>
                                 </div>
+                            </div>
 
-                                {/* <div class="skills__data">
-                                    <span class="skills__name">Firebase</span>
-                                    <span class="skills__number">90%</span>
-                                    <span class="skills__bar skills__firebase"></span>
-                                </div> */}
+                            <div class="skills__content">
+                                <h3 class="skills__subtitle">Dev tools</h3>
 
                                 <div class="skills__data">
-                                    <span class="skills__name">Python</span>
-                                    <span class="skills__number">60%</span>
-                                    <span class="skills__bar skills__python"></span>
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">git</span>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">GitHub</span>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">Testrail</span>
+                                </div>
+                            </div>
+
+                            <div class="skills__content">
+                                <h3 class="skills__subtitle">Project management tool</h3>
+
+                                <div class="skills__data">
+                                    <i class="bx bx-send"></i>
+                                    &emsp;
+                                    <span class="skills__name">JIRA</span>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +503,7 @@ class About extends Component {
                     {/* Works */}
                     <section class="works section" id="works">
                         {/* <span class="section-subtitle">My portfolio</span> */}
-                        <h2 class="section-title"><b>Recent projects</b></h2>
+                        <h2 class="section-title"><b>Self projects</b></h2>
 
                         <div class="works__container bd-grid">
                 <div class="works__img">
@@ -435,20 +569,55 @@ class About extends Component {
                         <div class="contact__container bd-grid">
                             <form action="" class="contact__form">
                                 <div class="contact__inputs">
-                                    <input type="text" placeholder="Name" class="contact__input" onKeyUp={this.message} />
-                                    <input type="mail" placeholder="Email" class="contact__input" onKeyUp={this.message}/>
+                                    <input 
+                                        type="text"
+                                        placeholder="Name*" 
+                                        class="contact__input" 
+                                        id="alias"
+                                        name="alias" 
+                                        autoComplete="off"
+                                        onChange={this.onChange} 
+                                        value={this.state.alias}
+                                    />
+                                    <input 
+                                        type="mail" 
+                                        placeholder="Email*" 
+                                        class="contact__input" 
+                                        id="email" 
+                                        name="email"
+                                        autoComplete="off"
+                                        onChange={this.onChange} 
+                                        value={this.state.email}
+                                    />
                                 </div>
 
-                                <input type="text" placeholder="Project" class="contact__input" onKeyUp={this.message}/>
+                                <input 
+                                    type="text" 
+                                    placeholder="Phone*" 
+                                    class="contact__input"
+                                    id="phone" 
+                                    name="phone"
+                                    autoComplete="off"
+                                    onChange={this.onChange} 
+                                    value={this.state.phone} 
+                                />
 
-                                <textarea name="" id="" cols="0" rows="10" placeholder="Message" class="contact__input" onKeyUp={this.message}></textarea>
+                                <textarea 
+                                    name="message" 
+                                    id="message" 
+                                    cols="0" rows="10" 
+                                    placeholder="Enter your message*" 
+                                    class="contact__input"
+                                    onChange={this.onChange} 
+                                    value={this.state.message}
+                                > </textarea>
 
-                                <input type="submit" value="Send Message" class="button contact__button" onClick={this.message} />
+                                <input type="submit" value="Send Message" class="button contact__button" onClick={this.SendMessage} />
                             </form>
 
                             <div>
                                 <div class="contact__info">
-                                    <h3 class="contact__subtitle">Call me</h3>
+                                    <h3 class="contact__subtitle">Phone</h3>
                                     <span class="contact__text">+91-9085895248</span>
                                     <span class="contact__text">+91-9101514092</span>
                                 </div>
@@ -480,10 +649,11 @@ class About extends Component {
                             <a href="https://twitter.com/rahulsarma77" class="footer__link"><i class="bx bxl-twitter"></i></a>
                         </div>
 
-                        <p class="footer__copy">All rights reserved - 2021</p>
+                        <p class="footer__copy">Published on - 30-jan-2021</p>
                     </div>
                 </footer>
                 </main>
+                </div>
             </React.Fragment> 
 
          );
