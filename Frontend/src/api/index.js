@@ -5,12 +5,14 @@ const api = axios.create({
 })
 
 export const insertData = payload => api.post(`/insert`, payload)
-export const displayData = () => api.get(`/display`)
+export const getAllData = () => api.get(`/getAllData`)
+export const login = (payload) => api.post(`/login`, payload)
 
 
 const apis = {
     insertData,
-    displayData,
+    getAllData,
+    login
 }
 
 export default apis
